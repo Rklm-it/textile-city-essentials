@@ -20,6 +20,13 @@ export const Route = createFileRoute("/")({
         content:
           "Ткани, швейная фурнитура, наполнители, комплектующие для матрасов, оборудование и упаковка оптом. Работаем с 2009 года.",
       },
+      // Превью для мессенджеров: ссылку показывают с телефона, и картинка
+      // решает больше текста. Это снимок самого первого экрана, а не сток и
+      // не заглушка конструктора.
+      { property: "og:image", content: "/og.png" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { name: "twitter:image", content: "/og.png" },
     ],
   }),
   component: Index,
