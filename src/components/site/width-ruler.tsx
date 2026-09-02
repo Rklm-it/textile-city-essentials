@@ -28,14 +28,20 @@ export function WidthRuler({ className = "" }: { className?: string }) {
   );
 }
 
-/** Полоса длиной, пропорциональной ширине рулона. */
+/**
+ * Полоса длиной, пропорциональной ширине рулона.
+ *
+ * Высота 8 px, а не 1: волосяной линией приём не читался вовсе — на живой
+ * странице полосы выглядели как случайные штрихи, и разница между Ш-90 и
+ * Ш-280 в глаза не бросалась.
+ */
 export function WidthBar({ cm, label }: { cm: number; label?: string }) {
   return (
     <div className="flex min-w-0 items-center gap-3">
-      <div className="h-px min-w-0 flex-1 bg-foreground/15">
-        <div className="h-px bg-accent" style={{ width: `${(cm / MAX_CM) * 100}%` }} />
+      <div className="h-2 min-w-0 flex-1 bg-foreground/10">
+        <div className="h-2 bg-accent" style={{ width: `${(cm / MAX_CM) * 100}%` }} />
       </div>
-      <span className="tech-line shrink-0 text-accent">{label ?? `Ш-${cm}`}</span>
+      <span className="tech-line shrink-0 whitespace-nowrap text-accent">{label ?? `Ш-${cm}`}</span>
     </div>
   );
 }

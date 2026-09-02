@@ -66,27 +66,45 @@ const FACTS = [
 ];
 
 const CATALOG = [
-  { title: "Ткани", cm: 280, subs: "Сатин · бязь · брезент · мебельные ткани" },
-  { title: "Швейная фурнитура", cm: 150, subs: "Нитки · молнии · резинка · косая бейка" },
+  { title: "Ткани", subs_n: 153, cm: 325, subs: "Сатин · бязь · брезент · мебельные ткани" },
+  { title: "Швейная фурнитура", subs_n: 80, cm: 0, subs: "Нитки · молнии · резинка · косая бейка" },
   {
     title: "Наполнители и утеплители",
-    cm: 160,
+    subs_n: 15,
+    cm: 220,
     subs: "Синтепон · холлофайбер · поролон · утеплитель «Сиберия»",
   },
   {
     title: "Комплектующие для матрасов",
-    cm: 200,
+    subs_n: 11,
+    cm: 0,
     subs: "Матрасные ткани · поролон · войлок · фурнитура",
   },
-  { title: "Швейное оборудование", cm: 0, subs: "Иглы Organ · Schmetz · Gamma · лапки · масло" },
-  { title: "Упаковка для текстиля", cm: 0, subs: "Пакеты с клапаном · мешки · сумки-чемоданы" },
+  {
+    title: "Швейное оборудование",
+    subs_n: 8,
+    cm: 0,
+    subs: "Иглы Organ · Schmetz · Gamma · лапки · масло",
+  },
+  {
+    title: "Упаковка для текстиля",
+    subs_n: 7,
+    cm: 0,
+    subs: "Пакеты с клапаном · мешки · сумки-чемоданы",
+  },
   {
     title: "Текстиль для отелей и ресторанов",
-    cm: 280,
+    subs_n: 7,
+    cm: 0,
     subs: "Сатин однотонный · сатин жаккард · перкаль · махровое полотно",
   },
-  { title: "Текстиль для детских садов", cm: 220, subs: "Бязь детская · поплин детский" },
-  { title: "Домашний текстиль", cm: 220, subs: "Одеяла · подушки · покрывала · наматрасники" },
+  { title: "Текстиль для детских садов", subs_n: 2, cm: 0, subs: "Бязь детская · поплин детский" },
+  {
+    title: "Домашний текстиль",
+    subs_n: 8,
+    cm: 0,
+    subs: "Одеяла · подушки · покрывала · наматрасники",
+  },
 ];
 
 const OPTOVIE = [
@@ -114,17 +132,17 @@ const SERVICES = [
   {
     title: "Пошив постельного белья",
     text: "Для гостиниц, пансионатов, больниц, детских садов и других учреждений по индивидуальным заказам, с учётом всех требований заказчика. Материалы можно выбрать на сайте или приехать на склад, образцы тканей отправляют по запросу. Популярные ткани для пошива: страйп-сатин, сатин, перкаль, бязь, махровое полотно. Срок пошива от 3 до 10 дней. На каждый заказ подписывается спецификация с точными параметрами; если заказ пришёл не по параметрам — меняют бесплатно.",
-    tech: "срок: от 3 до 10 дней · минимальный объём: [N]",
+    tech: "срок пошива: от 3 до 10 дней",
   },
   {
     title: "Вышивка логотипа под заказ",
     text: "Для гостиниц, отелей, салонов красоты и ресторанов: постельное бельё, полотенца, халаты, скатерти, салфетки. Машинная вышивка нитками «Гутерманн» (Германия). Вышитый логотип не линяет, не выцветает и не деформируется.",
-    tech: "срок: [N] · минимальный объём: [N]",
+    tech: "",
   },
   {
     title: "Изготовление ткани с логотипом заказчика",
     text: "Для мебельного и матрасного производства, пошива подушек и одеял. Метраж от 15 000 м.п., срок выполнения от 2,5 месяцев, предоставляются отгрузочные образцы.",
-    tech: "срок: от 2,5 месяцев · минимальный объём: от 15 000 м.п.",
+    tech: "срок: от 2,5 месяцев · метраж: от 15 000 м.п.",
   },
 ];
 
@@ -144,27 +162,27 @@ const TASKS = [
 const PRODUCTS = [
   {
     name: "ткань Сатин-страйп полоса 3 см, белый, Ш-280 см",
-    tech: "Ш-280 см · пл. [N] г/м² · минимальный отрез [N] м",
+    tech: "Ш-280 см",
   },
   {
     name: "Ткань Брезент СКПВ Ш-90 пл.540гр 511252-СКПВ, м",
-    tech: "Ш-90 см · пл. 540 г/м² · арт. 511252-СКПВ · минимальный отрез [N] м",
+    tech: "Ш-90 см · пл. 540 г/м² · арт. 511252-СКПВ",
   },
   {
     name: "ткань Бязь отбеленная ГОСТ, Ш-220 см",
-    tech: "Ш-220 см · пл. [N] г/м² · минимальный отрез [N] м",
+    tech: "Ш-220 см",
   },
   {
     name: "Мех искусственный Норка Ш-190 см цв.коричневый 90-222-Н, м",
-    tech: "Ш-190 см · арт. 90-222-Н · минимальный отрез [N] м",
+    tech: "Ш-190 см · арт. 90-222-Н",
   },
   {
     name: 'ткань Перкаль «Текстура "Горный ветер 2"»',
-    tech: "Ш-[N] см · пл. [N] г/м² · минимальный отрез [N] м",
+    tech: "",
   },
   {
     name: "ткань вафельная «Бабочки»",
-    tech: "Ш-[N] см · пл. [N] г/м² · минимальный отрез [N] м",
+    tech: "",
   },
 ];
 
@@ -206,9 +224,6 @@ function Index() {
 
       {/* Линейка ширины ткани во всю ширину окна, заголовок стоит на ней */}
       <div className="shell pt-8 md:pt-12">
-        <p className="pb-2 text-[15px] font-semibold md:text-base">
-          Оптовый склад тканей и комплектующих — Ростов-на-Дону
-        </p>
         <WidthRuler />
       </div>
 
@@ -228,6 +243,14 @@ function Index() {
           >
             Запросить прайс
           </a>
+
+          <dl className="mt-12 border-t border-foreground/20">
+            {FACTS.map((f) => (
+              <div key={f} className="border-b border-foreground/20 py-3">
+                <dt className="text-[15px] font-semibold md:text-base">{f}</dt>
+              </div>
+            ))}
+          </dl>
         </div>
 
         <div className="min-w-0">
@@ -278,17 +301,6 @@ function Index() {
         </div>
       </section>
 
-      {/* Полоса фактов */}
-      <section className="border-y border-foreground/20">
-        <div className="shell grid grid-cols-1 gap-4 py-8 sm:grid-cols-2 lg:grid-cols-4 lg:py-10">
-          {FACTS.map((f) => (
-            <p key={f} className="text-[15px] font-semibold md:text-base">
-              {f}
-            </p>
-          ))}
-        </div>
-      </section>
-
       {/* Полоса ткани во всю ширину — вместо кадра склада, которого у клиента
           нет ни в одном размере. Ткань это повторяющийся рисунок, поэтому её
           честно класть плиткой; высота полосы не больше высоты кадра. */}
@@ -332,9 +344,13 @@ function Index() {
                 <p className="tech-line mt-1 opacity-70">{c.subs}</p>
               </div>
               {c.cm > 0 ? (
-                <WidthBar cm={c.cm} label={`Ш-${c.cm} см`} />
+                <WidthBar cm={c.cm} label={`до Ш-${c.cm} см`} />
               ) : (
-                <span className="tech-line opacity-50">—</span>
+                // Ширины рулона у ниток и пакетов нет — показываем то, что о
+                // разделе известно из выгрузки, а не пустое место.
+                <span className="tech-line text-right text-muted-foreground">
+                  {c.subs_n} подразделов
+                </span>
               )}
             </a>
           ))}
@@ -358,7 +374,7 @@ function Index() {
           {PRODUCTS.map((p) => (
             <article key={p.name} className="rounded-sm bg-card p-5 text-card-foreground">
               <h4 className="text-[17px] font-semibold leading-snug">{p.name}</h4>
-              <p className="tech-line mt-2 text-muted-foreground">{p.tech}</p>
+              {p.tech ? <p className="tech-line mt-2 text-muted-foreground">{p.tech}</p> : null}
               <div className="mt-5 flex items-center justify-between gap-3">
                 <p className="text-[15px] font-semibold">Цена по запросу</p>
                 <a
@@ -385,7 +401,7 @@ function Index() {
               <div className="min-w-0">
                 <h3 className="text-xl font-semibold md:text-2xl">{s.title}</h3>
                 <p className="measure mt-4">{s.text}</p>
-                <p className="tech-line mt-4 text-muted-foreground">{s.tech}</p>
+                {s.tech ? <p className="tech-line mt-4 text-muted-foreground">{s.tech}</p> : null}
                 <a
                   href="#zapros"
                   className="mt-6 inline-block rounded-sm bg-accent px-6 py-3 font-semibold text-accent-foreground"
