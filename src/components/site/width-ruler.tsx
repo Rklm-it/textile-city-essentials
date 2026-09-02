@@ -25,7 +25,6 @@ export function WidthRuler({ className = "" }: { className?: string }) {
         <span className="tech-line absolute -right-9 top-4 text-accent">см</span>
       </div>
     </div>
-
   );
 }
 

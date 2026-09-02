@@ -7,6 +7,14 @@
 /*
  * Текстиль-Сити — дизайн-система.
  * Все цвета в oklch, все размеры кратны 8 px, радиус скруглений 2 px.
+ *
+ * Палитра «Склад», выбрана владельцем из четырёх вариантов:
+ *   фон        #F4F4F2  светло-серый, как выбеленный бетон склада
+ *   текст      #101114  почти чёрный
+ *   акцент     #C2410C  оранжевый погрузчика — кнопки, активные состояния
+ *   распродажа #8A1B1B  тёмно-красный, только акции
+ * Первая палитра была снята по пикселям фотографий клиента (беж гобелена,
+ * олива) и владельцу не подошла: та читалась как рукоделие, а продают опт.
  */
 
 @theme inline {
@@ -52,28 +60,28 @@
 
 :root {
   --radius: 2px;
-  --background: oklch(0.9291 0.0185 86.15);
-  --foreground: oklch(0.2086 0.0085 264.37);
+  --background: oklch(0.9666 0.0026 106.45);
+  --foreground: oklch(0.1779 0.0064 271.04);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.2086 0.0085 264.37);
+  --card-foreground: oklch(0.1779 0.0064 271.04);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.2086 0.0085 264.37);
-  --primary: oklch(0.5615 0.0441 126.64);
+  --popover-foreground: oklch(0.1779 0.0064 271.04);
+  --primary: oklch(0.5534 0.1739 38.40);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.9291 0.0185 86.15);
-  --secondary-foreground: oklch(0.2086 0.0085 264.37);
-  --muted: oklch(0.9291 0.0185 86.15);
+  --secondary: oklch(0.9666 0.0026 106.45);
+  --secondary-foreground: oklch(0.1779 0.0064 271.04);
+  --muted: oklch(0.9666 0.0026 106.45);
   --muted-foreground: oklch(0.2086 0.0085 264.37 / 62%);
-  --accent: oklch(0.5615 0.0441 126.64);
+  --accent: oklch(0.5534 0.1739 38.40);
   --accent-foreground: oklch(1 0 0);
-  --sale: oklch(0.5194 0.1605 33.77);
+  --sale: oklch(0.4148 0.1465 26.43);
   --sale-foreground: oklch(1 0 0);
-  --destructive: oklch(0.5194 0.1605 33.77);
+  --destructive: oklch(0.4148 0.1465 26.43);
   --destructive-foreground: oklch(1 0 0);
   --border: oklch(0.2086 0.0085 264.37 / 18%);
-  --rule: oklch(0.2086 0.0085 264.37);
+  --rule: oklch(0.1779 0.0064 271.04);
   --input: oklch(0.2086 0.0085 264.37 / 24%);
-  --ring: oklch(0.5615 0.0441 126.64);
+  --ring: oklch(0.5534 0.1739 38.40);
 }
 
 @layer base {
