@@ -1,24 +1,359 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { WidthRuler, WidthBar } from "@/components/site/width-ruler";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Текстиль-Сити — всё для швейного и мебельного производства" },
+      {
+        name: "description",
+        content:
+          "Оптовый склад в Ростове-на-Дону: более 55 000 наименований тканей, фурнитуры, наполнителей и комплектующих для матрасов. Отгрузка рулонами и упаковками.",
+      },
+      {
+        property: "og:title",
+        content: "Текстиль-Сити — оптовый склад текстиля в Ростове-на-Дону",
+      },
+      {
+        property: "og:description",
+        content:
+          "Ткани, швейная фурнитура, наполнители, комплектующие для матрасов, оборудование и упаковка оптом. Работаем с 2009 года.",
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+const MENU = ["Каталог", "Услуги", "Оптовикам", "Доставка", "О компании", "Контакты"];
+
+const STOCK = [
+  {
+    name: "Ткань Брезент СКПВ",
+    width: "Ш-90 см",
+    density: "пл. 540 г/м²",
+    price: "цена по запросу",
+  },
+  { name: "Бязь суровая", width: "Ш-165 см", density: "пл. 120 г/м²", price: "цена по запросу" },
+  {
+    name: 'Ткань Гобелен "Дикая орхидея" цв.1',
+    width: "Ш-200 см",
+    density: "пл. 325 г/м²",
+    price: "цена по запросу",
+  },
+  { name: "П/лён набивной", width: "Ш-220 см", density: "пл. 140 г/м²", price: "цена по запросу" },
+  {
+    name: "ткань Сатин-страйп полоса 3 см, белый",
+    width: "Ш-280 см",
+    density: "—",
+    price: "цена по запросу",
+  },
+];
+
+const DIVISIONS = [
+  "Ткани — 153 подраздела",
+  "Швейная фурнитура — 80 подразделов",
+  "Наполнители и утеплители — 15 подразделов",
+  "Комплектующие для матрасов — 11 подразделов",
+  "Домашний текстиль — 8 подразделов",
+];
+
+const FACTS = [
+  "Работаем с 2009 года",
+  "Более 55 000 товаров на складе",
+  "Новое поступление каждую неделю",
+  "Отгружаем во все регионы России",
+];
+
+const CATALOG = [
+  { title: "Ткани", cm: 220, note: "бязь, сатин, брезент, гобелен, п/лён — 153 подраздела" },
+  { title: "Брезент и спецткани", cm: 90, note: "СКПВ, ОП, палаточные — [N] подразделов" },
+  { title: "Швейная фурнитура", cm: 150, note: "молнии, нитки, кнопки — 80 подразделов" },
+  { title: "Наполнители и утеплители", cm: 160, note: "синтепон, холлофайбер — 15 подразделов" },
+  { title: "Комплектующие для матрасов", cm: 200, note: "«Фортекс» — 11 подразделов" },
+  { title: "Домашний и гостиничный текстиль", cm: 280, note: "КПБ, махра — 8 подразделов" },
+];
+
+const PRODUCTS = [
+  {
+    name: "Бязь отбеленная",
+    tech: "Ш-220 · пл. 120 г/м² · 100% хлопок · арт. 6165130 · минимальный отрез [N] м",
+  },
+  {
+    name: "Ткань Брезент СКПВ",
+    tech: "Ш-90 · пл. 540 г/м² · 100% хлопок · арт. [N] · минимальный отрез [N] м",
+  },
+  {
+    name: "Сатин-страйп полоса 3 см",
+    tech: "Ш-280 · пл. [N] г/м² · 100% хлопок · арт. [N] · минимальный отрез [N] м",
+  },
+];
+
 function Index() {
+  const [minWidth, setMinWidth] = useState(200);
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Шапка */}
+      <header className="border-b border-foreground/20">
+        <div className="shell grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-4 lg:flex lg:justify-between">
+          <a href="/" className="min-w-0 truncate font-display text-lg lg:text-xl">
+            Текстиль-Сити
+          </a>
+          <nav className="order-3 col-span-2 -mx-4 overflow-x-auto px-4 lg:order-none lg:mx-0 lg:overflow-visible lg:px-0">
+            <ul className="flex items-center gap-5 whitespace-nowrap text-[15px] lg:gap-6">
+              {MENU.map((item) => (
+                <li key={item}>
+                  <a href="#zaglushka" className="hover:text-accent">
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div className="flex shrink-0 items-center gap-4">
+            <a href="tel:+78632732350" className="tech-line hidden lg:inline">
+              +7 (863) 273-23-50
+            </a>
+            <a
+              href="#zapros"
+              className="rounded-sm bg-accent px-4 py-2 text-[15px] font-semibold text-accent-foreground"
+            >
+              Запросить прайс
+            </a>
+          </div>
+        </div>
+      </header>
+
+      {/* Линейка ширины ткани во всю ширину окна, заголовок стоит на ней */}
+      <div className="shell pt-8 md:pt-12">
+        <p className="pb-2 text-[15px] font-semibold md:text-base">
+          Оптовый склад тканей и комплектующих — Ростов-на-Дону
+        </p>
+        <WidthRuler />
+      </div>
+
+      {/* Первый экран */}
+      <section className="shell grid grid-cols-1 gap-10 pb-14 pt-6 md:pb-24 md:pt-8 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <div className="fluid-figure">
+            <span>55 000</span>
+          </div>
+          <p className="measure mt-6">
+            наименований на складе в Ростове-на-Дону. Девять разделов, 300 подразделов, отгрузка
+            целыми рулонами и упаковками
+          </p>
+          <a
+            href="#zapros"
+            className="mt-8 inline-block rounded-sm bg-accent px-6 py-3 font-semibold text-accent-foreground"
+          >
+            Запросить прайс
+          </a>
+        </div>
+
+        <div className="min-w-0">
+          {/* Складская ведомость */}
+          <div className="hidden md:block">
+            <div className="tech-line grid grid-cols-[minmax(0,1fr)_88px_120px_140px] gap-4 border-b border-foreground pb-2 font-semibold">
+              <span>Наименование</span>
+              <span>Ширина</span>
+              <span>Плотность</span>
+              <span>Цена</span>
+            </div>
+            {STOCK.map((row) => (
+              <div
+                key={row.name}
+                className="tech-line grid grid-cols-[minmax(0,1fr)_88px_120px_140px] gap-4 border-b border-foreground/20 py-3"
+              >
+                <span className="min-w-0">{row.name}</span>
+                <span>{row.width}</span>
+                <span>{row.density}</span>
+                <span>{row.price}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Телефон: строка разворачивается в две */}
+          <div className="md:hidden">
+            {STOCK.map((row) => (
+              <div key={row.name} className="border-b border-foreground/20 py-3">
+                <p className="tech-line font-semibold">{row.name}</p>
+                <p className="tech-line text-muted-foreground">
+                  {row.width} · {row.density} · {row.price}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 border-t-2 border-foreground pt-4">
+            {DIVISIONS.map((d) => (
+              <a
+                key={d}
+                href="#katalog"
+                className="tech-line block border-b border-foreground/20 py-3 hover:text-accent"
+              >
+                {d}
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Полоса фактов */}
+      <section className="border-y border-foreground/20">
+        <div className="shell grid grid-cols-1 gap-4 py-8 sm:grid-cols-2 lg:grid-cols-4 lg:py-10">
+          {FACTS.map((f) => (
+            <p key={f} className="text-[15px] font-semibold md:text-base">
+              {f}
+            </p>
+          ))}
+        </div>
+      </section>
+
+      {/* Единственная фотография во всю ширину */}
       <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
+        src="/images/sklad-tekstil-city-rostov.jpg"
+        alt="Склад «Текстиль-Сити» в Ростове-на-Дону: рулоны тканей на стеллажах"
+        className="h-[260px] w-full object-cover md:h-[520px]"
+        loading="lazy"
       />
+
+      {/* О компании / раздел с H2 */}
+      <section className="shell section-y">
+        <h1 className="h2-display measure">Всё для швейного и мебельного производства</h1>
+        <p className="measure mt-6">
+          «Текстиль-Сити» работает с 2009 года и снабжает швейные и мебельные производства юга
+          России: ткани, швейная фурнитура, наполнители и утеплители, комплектующие для матрасов,
+          швейное оборудование, упаковка для текстиля, домашний и гостиничный текстиль.
+        </p>
+        <p className="measure mt-4">
+          С 2011 года — официальный представитель компании «Фортекс», комплектующие для
+          ортопедических матрасов.
+        </p>
+      </section>
+
+      {/* Каталог */}
+      <section id="katalog" className="shell section-y border-t border-foreground/20">
+        <h2 className="h2-display">Каталог</h2>
+        <div className="mt-10 grid grid-cols-1 gap-px bg-foreground/20 sm:grid-cols-2 lg:grid-cols-3">
+          {CATALOG.map((c) => (
+            <a key={c.title} href="#zaglushka" className="block bg-background p-6 hover:bg-card">
+              <h3 className="text-[17px] font-semibold md:text-lg">{c.title}</h3>
+              <div className="mt-4">
+                <WidthBar cm={c.cm} label={`Ш-${c.cm}`} />
+              </div>
+              <p className="tech-line mt-3 text-muted-foreground">{c.note}</p>
+            </a>
+          ))}
+        </div>
+
+        {/* Карточки товара */}
+        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+          {PRODUCTS.map((p) => (
+            <article key={p.name} className="rounded-sm bg-card p-5 text-card-foreground">
+              <img
+                src={`/images/tovar-${p.name
+                  .toLowerCase()
+                  .replace(/[^а-яё0-9]+/gi, "-")
+                  .replace(/^-|-$/g, "")}.jpg`}
+                alt={p.name}
+                className="mb-4 aspect-[4/3] w-full rounded-sm object-cover"
+                loading="lazy"
+              />
+              <h3 className="text-[17px] font-semibold">{p.name}</h3>
+              <p className="tech-line mt-2 text-muted-foreground">{p.tech}</p>
+              <p className="tech-line mt-4">цена по запросу</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Подбор по ширине */}
+      <section className="shell section-y border-t border-foreground/20">
+        <h2 className="h2-display">Подбор по ширине рулона</h2>
+        <p className="measure mt-4">
+          Первый вопрос при раскладке — влезет ли ткань. Задайте нужную ширину, и мы пришлём
+          подходящие позиции со склада.
+        </p>
+        <div className="mt-10 max-w-3xl">
+          <p className="tech-line mb-4">нужна ткань шире {minWidth} см</p>
+          <input
+            type="range"
+            min={0}
+            max={330}
+            step={5}
+            value={minWidth}
+            onChange={(e) => setMinWidth(Number(e.target.value))}
+            aria-label="Минимальная ширина ткани, см"
+            className="w-full accent-[var(--accent)]"
+          />
+          <WidthRuler className="mt-2" />
+        </div>
+      </section>
+
+      {/* Заглушки */}
+      <section id="zaglushka" className="shell section-y border-t border-foreground/20">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
+          {["Услуги", "Оптовикам", "Доставка", "Контакты"].map((t) => (
+            <div key={t}>
+              <h2 className="text-[17px] font-semibold md:text-lg">{t}</h2>
+              <p className="tech-line mt-2 text-muted-foreground">[раздел в работе]</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Подвал */}
+      <footer id="zapros" className="border-t border-foreground/20">
+        <div className="shell grid grid-cols-1 gap-10 py-14 md:grid-cols-2 lg:grid-cols-4 lg:py-20">
+          <div>
+            <p className="font-display text-lg">Текстиль-Сити</p>
+            <p className="mt-4 text-[15px]">
+              344064, Ростов-на-Дону, пер. Технологический, 4 (вход с ул. Вавилова, 56)
+            </p>
+          </div>
+          <div className="tech-line space-y-2">
+            <p>
+              <a href="tel:+78632732350">+7 (863) 273-23-50</a> — склад, многоканальный
+            </p>
+            <p>
+              <a href="tel:88007004475">8-800-700-44-75</a> — бесплатный по России
+            </p>
+            <p>
+              <a href="tel:+79182730095">+7 918 273-00-95</a> — Viber и WhatsApp
+            </p>
+            <p>
+              <a href="mailto:info@textileopt.ru">info@textileopt.ru</a>
+            </p>
+            <p>
+              <a href="mailto:textil-city@yandex.ru">textil-city@yandex.ru</a>
+            </p>
+          </div>
+          <div className="tech-line space-y-2">
+            <p>Пн–Пт 9:30–17:30</p>
+            <p>Сб 10:00–16:00</p>
+            <p>Вс — выходной</p>
+          </div>
+          <div className="tech-line space-y-2 text-muted-foreground">
+            <p>ИП Костанова Татьяна Николаевна</p>
+            <p>ИНН 616112762674</p>
+            <p>ОГРНИП 309619317300075</p>
+            <p>
+              <a href="#zaglushka" className="underline underline-offset-4">
+                Политика конфиденциальности
+              </a>
+            </p>
+          </div>
+        </div>
+        <div className="shell border-t border-foreground/20 py-6">
+          <p className="tech-line">
+            Розничный магазин — Любодом,{" "}
+            <a href="https://lubodom.com" className="underline underline-offset-4">
+              lubodom.com
+            </a>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
