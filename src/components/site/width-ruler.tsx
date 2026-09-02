@@ -7,7 +7,7 @@ const TICKS = [80, 150, 220, 280, 325];
  */
 export function WidthRuler({ className = "" }: { className?: string }) {
   return (
-    <div className={`relative select-none ${className}`} aria-hidden="true">
+    <div className={`relative select-none pr-9 ${className}`} aria-hidden="true">
       <div className="h-px w-full bg-accent" />
       <div className="relative h-8">
         {TICKS.map((cm) => (
@@ -22,9 +22,10 @@ export function WidthRuler({ className = "" }: { className?: string }) {
             </span>
           </div>
         ))}
-        <span className="tech-line absolute right-0 top-4 text-accent">см</span>
+        <span className="tech-line absolute -right-9 top-4 text-accent">см</span>
       </div>
     </div>
+
   );
 }
 
