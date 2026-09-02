@@ -556,7 +556,7 @@ function Index() {
             <p>ИНН 616112762674</p>
             <p>ОГРНИП 309619317300075</p>
             <p>
-              <a href="#zaglushka" className="underline underline-offset-4">
+              <a id="privacy" href="#privacy" className="underline underline-offset-4">
                 Политика конфиденциальности
               </a>
             </p>
