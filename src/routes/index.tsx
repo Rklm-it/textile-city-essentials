@@ -293,7 +293,6 @@ function Index() {
 
         {/* Карточки товара: цена по запросу, как на их сайте */}
         <p className="tech-line mt-16 opacity-70">Актуальные цены и наличие по запросу</p>
-        {/* placeholder-remove-marker */}
         <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {PRODUCTS.map((p) => (
             <article key={p.name} className="rounded-sm bg-card p-5 text-card-foreground">
