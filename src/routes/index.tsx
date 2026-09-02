@@ -342,6 +342,37 @@ function Index() {
         </div>
       </section>
 
+      {/* Услуги: три горизонтальные полосы во всю ширину */}
+      <section id="uslugi" className="shell section-y border-t border-foreground/20">
+        <p className="h2-display">Мы не только продаём ткань — мы шьём</p>
+        <div className="mt-12">
+          {SERVICES.map((s) => (
+            <article
+              key={s.title}
+              className="grid grid-cols-1 gap-6 border-b border-foreground/20 py-10 first:border-t md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] md:gap-10"
+            >
+              <img
+                src={`/images/usluga-${s.img}.jpg`}
+                alt={s.title}
+                className="aspect-[2/1] w-full rounded-sm object-cover"
+                loading="lazy"
+              />
+              <div className="min-w-0">
+                <h3 className="text-xl font-semibold md:text-2xl">{s.title}</h3>
+                <p className="measure mt-4">{s.text}</p>
+                <p className="tech-line mt-4 text-muted-foreground">{s.tech}</p>
+                <a
+                  href="#zapros"
+                  className="mt-6 inline-block rounded-sm bg-accent px-6 py-3 font-semibold text-accent-foreground"
+                >
+                  Обсудить заказ
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       {/* Подбор по ширине */}
       <section className="shell section-y border-t border-foreground/20">
         <h2 className="h2-display">Подбор по ширине рулона</h2>
