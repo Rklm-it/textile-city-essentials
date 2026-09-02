@@ -77,6 +77,21 @@ const CATALOG = [
   { title: "Домашний текстиль", cm: 220, subs: "Одеяла · подушки · покрывала · наматрасники" },
 ];
 
+const OPTOVIE = [
+  { cond: "Минимальная сумма заказа в интернет-магазине", val: "3 000 ₽, можно набирать из разных отделов" },
+  { cond: "Оптовая цена", val: "только целыми рулонами и упаковками" },
+  { cond: "Отдел распродажи", val: "оптовая цена на мерный лоскут и отрез от 3 метров" },
+  { cond: "Швейная фурнитура и упаковка", val: "оптовая цена от 1 000 ₽, целыми упаковками" },
+  { cond: "Швейное оборудование", val: "от 3 000 ₽, запчасти и приспособления от 1 000 ₽" },
+  { cond: "Домашний и гостиничный текстиль", val: "от 3 000 ₽" },
+  { cond: "Бесплатная доставка", val: "от 100 000 ₽ по Ростовской области, Краснодарскому и Ставропольскому краю, Воронежской области" },
+  { cond: "Резерв заказа", val: "до 5 дней" },
+  { cond: "Цены", val: "указаны с НДС, юрлицам счёт с выделенным НДС" },
+];
+
+const DELIVERY =
+  "Деловые Линии, ПЭК, КИТ, Байкал-Сервис, НЕВА, Энергия, ЦАП, СДЭК, Почта России. До терминала в Ростове-на-Дону от 250 ₽. Отправка по будним дням, трек-номер приходит на почту.";
+
 const SERVICES = [
   {
     title: "Пошив постельного белья",
@@ -396,20 +411,117 @@ function Index() {
         </div>
       </section>
 
-      {/* Заглушки */}
-      <section id="zaglushka" className="shell section-y border-t border-foreground/20">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
-          {["Оптовикам", "Доставка", "Контакты"].map((t) => (
-            <div key={t}>
-              <h2 className="text-[17px] font-semibold md:text-lg">{t}</h2>
-              <p className="tech-line mt-2 text-muted-foreground">[раздел в работе]</p>
+      {/* Оптовикам: правила отпуска товаром — таблица без карточек */}
+      <section id="optovikam" className="shell section-y border-t border-foreground/20">
+        <h2 className="h2-display">Оптовикам</h2>
+        <div className="mt-10">
+          <div className="tech-line grid grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] gap-4 border-b border-foreground pb-2 font-semibold">
+            <span>Условие</span>
+            <span>Значение</span>
+          </div>
+          {OPTOVIE.map((r) => (
+            <div
+              key={r.cond}
+              className="grid grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] gap-4 border-b border-foreground/20 py-3"
+            >
+              <span className="min-w-0">{r.cond}</span>
+              <span className="min-w-0">{r.val}</span>
             </div>
           ))}
+        </div>
+        <p className="mt-6">
+          Нужен меньший метраж — наш розничный магазин{" "}
+          <a href="https://lubodom.com" className="underline underline-offset-4">
+            Любодом, lubodom.com
+          </a>
+        </p>
+      </section>
+
+      {/* Доставка одной строкой */}
+      <section id="dostavka" className="shell section-y border-t border-foreground/20">
+        <h2 className="h2-display">Доставка</h2>
+        <p className="measure mt-6">{DELIVERY}</p>
+      </section>
+
+      {/* Заявка: форма, рядом телефоны и режим работы */}
+      <section id="zapros" className="shell section-y border-t border-foreground/20">
+        <p className="h2-display">Пришлём прайс и наличие, подберём ткань под изделие</p>
+        <div className="mt-12 grid grid-cols-1 gap-12 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] md:gap-16">
+          <form onSubmit={(e) => e.preventDefault()} className="min-w-0 space-y-5">
+            <label className="block">
+              <span className="tech-line">Что нужно</span>
+              <textarea
+                name="what"
+                rows={3}
+                className="mt-2 w-full rounded-sm border border-foreground/40 bg-card px-3 py-2 text-[15px] outline-none focus:border-accent"
+              />
+            </label>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <label className="block">
+                <span className="tech-line">Имя</span>
+                <input
+                  type="text"
+                  name="name"
+                  className="mt-2 w-full rounded-sm border border-foreground/40 bg-card px-3 py-2 text-[15px] outline-none focus:border-accent"
+                />
+              </label>
+              <label className="block">
+                <span className="tech-line">Телефон</span>
+                <input
+                  type="tel"
+                  name="phone"
+                  className="mt-2 w-full rounded-sm border border-foreground/40 bg-card px-3 py-2 text-[15px] outline-none focus:border-accent"
+                />
+              </label>
+            </div>
+            <label className="block">
+              <span className="tech-line">E-mail</span>
+              <input
+                type="email"
+                name="email"
+                className="mt-2 w-full rounded-sm border border-foreground/40 bg-card px-3 py-2 text-[15px] outline-none focus:border-accent"
+              />
+            </label>
+            <label className="flex items-start gap-3 text-[15px]">
+              <input type="checkbox" name="consent" required className="mt-1 accent-[var(--accent)]" />
+              <span>
+                Согласен на обработку персональных данных согласно{" "}
+                <a href="#privacy" className="underline underline-offset-4">
+                  политике конфиденциальности
+                </a>
+              </span>
+            </label>
+            <button
+              type="submit"
+              className="rounded-sm bg-accent px-6 py-3 font-semibold text-accent-foreground"
+            >
+              Отправить заявку
+            </button>
+          </form>
+
+          <div className="tech-line space-y-4">
+            <div className="space-y-2">
+              <p>
+                <a href="tel:+78632732350">+7 (863) 273-23-50</a> — склад, многоканальный
+              </p>
+              <p>
+                <a href="tel:88007004475">8-800-700-44-75</a> — бесплатный по России
+              </p>
+              <p>
+                <a href="tel:+79182730095">+7 918 273-00-95</a> — Viber и WhatsApp
+              </p>
+            </div>
+            <div className="space-y-2">
+              <p>Пн–Пт 9:30–17:30</p>
+              <p>Сб 10:00–16:00</p>
+              <p>Вс — выходной</p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Подвал */}
-      <footer id="zapros" className="border-t border-foreground/20">
+      <footer className="border-t border-foreground/20">
         <div className="shell grid grid-cols-1 gap-10 py-14 md:grid-cols-2 lg:grid-cols-4 lg:py-20">
           <div>
             <p className="font-display text-lg">Текстиль-Сити</p>
@@ -444,7 +556,7 @@ function Index() {
             <p>ИНН 616112762674</p>
             <p>ОГРНИП 309619317300075</p>
             <p>
-              <a href="#zaglushka" className="underline underline-offset-4">
+              <a id="privacy" href="#privacy" className="underline underline-offset-4">
                 Политика конфиденциальности
               </a>
             </p>
