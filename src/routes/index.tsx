@@ -486,7 +486,7 @@ function Index() {
               <input type="checkbox" name="consent" required className="mt-1 accent-[var(--accent)]" />
               <span>
                 Согласен на обработку персональных данных согласно{" "}
-                <a href="#zaglushka" className="underline underline-offset-4">
+                <a href="#privacy" className="underline underline-offset-4">
                   политике конфиденциальности
                 </a>
               </span>
