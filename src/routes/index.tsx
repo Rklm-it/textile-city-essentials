@@ -521,7 +521,7 @@ function Index() {
       </section>
 
       {/* Подвал */}
-      <footer id="zapros" className="border-t border-foreground/20">
+      <footer className="border-t border-foreground/20">
         <div className="shell grid grid-cols-1 gap-10 py-14 md:grid-cols-2 lg:grid-cols-4 lg:py-20">
           <div>
             <p className="font-display text-lg">Текстиль-Сити</p>
