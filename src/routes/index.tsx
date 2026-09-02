@@ -186,8 +186,14 @@ const PRODUCTS = [
   },
 ];
 
+// Приёмник заявок (Телеграм + CRM на сервере владельца, 152-ФЗ) ещё не
+// подключён. Пока false — форма показывает честное состояние и телефон, а не
+// делает вид, что письмо ушло.
+const PRIEMNIK_PODKLYUCHEN = false;
+
 function Index() {
   const [minWidth, setMinWidth] = useState(200);
+  const [otpravlena, setOtpravlena] = useState(false);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -473,7 +479,13 @@ function Index() {
       <section id="zapros" className="shell section-y border-t border-foreground/20">
         <p className="h2-display">Пришлём прайс и наличие, подберём ткань под изделие</p>
         <div className="mt-12 grid grid-cols-1 gap-12 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] md:gap-16">
-          <form onSubmit={(e) => e.preventDefault()} className="min-w-0 space-y-5">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setOtpravlena(true);
+            }}
+            className="min-w-0 space-y-5"
+          >
             <label className="block">
               <span className="tech-line">Что нужно</span>
               <textarea
@@ -524,10 +536,28 @@ function Index() {
             </label>
             <button
               type="submit"
-              className="rounded-sm bg-accent px-6 py-3 font-semibold text-accent-foreground"
+              className="rounded-sm bg-accent px-6 py-3 font-semibold text-accent-foreground hover:opacity-90"
             >
               Отправить заявку
             </button>
+
+            {otpravlena ? (
+              <div role="status" className="border-l-2 border-accent bg-card p-4 text-[15px]">
+                <p className="font-semibold">Заявка записана</p>
+                <p className="mt-2 text-muted-foreground">
+                  {PRIEMNIK_PODKLYUCHEN
+                    ? "Перезвоним в рабочее время: Пн–Пт 9:30–17:30, Сб 10:00–16:00."
+                    : "Отправка на сервер ещё подключается. Чтобы не ждать — позвоните на склад:"}
+                </p>
+                {PRIEMNIK_PODKLYUCHEN ? null : (
+                  <p className="tech-line mt-2">
+                    <a href="tel:+78632732350" className="underline underline-offset-4">
+                      +7 (863) 273-23-50
+                    </a>
+                  </p>
+                )}
+              </div>
+            ) : null}
           </form>
 
           <div className="tech-line space-y-4">
