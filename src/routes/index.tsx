@@ -256,23 +256,44 @@ function Index() {
         </p>
       </section>
 
-      {/* Каталог */}
+      {/* Каталог: девять разделов строками во всю ширину */}
       <section id="katalog" className="shell section-y border-t border-foreground/20">
         <h2 className="h2-display">Каталог</h2>
-        <div className="mt-10 grid grid-cols-1 gap-px bg-foreground/20 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10">
           {CATALOG.map((c) => (
-            <a key={c.title} href="#zaglushka" className="block bg-background p-6 hover:bg-card">
-              <h3 className="text-[17px] font-semibold md:text-lg">{c.title}</h3>
-              <div className="mt-4">
-                <WidthBar cm={c.cm} label={`Ш-${c.cm}`} />
+            <a
+              key={c.title}
+              href="#zaglushka"
+              className="group grid grid-cols-1 items-center gap-2 border-b border-foreground/20 py-6 first:border-t hover:text-accent md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-10"
+            >
+              <div className="min-w-0">
+                <h3 className="text-[17px] font-semibold md:text-lg">{c.title}</h3>
+                <p className="tech-line mt-1 opacity-70">{c.subs}</p>
               </div>
-              <p className="tech-line mt-3 text-muted-foreground">{c.note}</p>
+              {c.cm > 0 ? (
+                <WidthBar cm={c.cm} label={`Ш-${c.cm} см`} />
+              ) : (
+                <span className="tech-line opacity-50">—</span>
+              )}
             </a>
           ))}
         </div>
 
-        {/* Карточки товара */}
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+        {/* Подбор по задаче */}
+        <div className="mt-16 border-t-2 border-foreground pt-8">
+          <h3 className="text-xl font-semibold md:text-2xl">Подбор по задаче</h3>
+          <div className="mt-6 grid grid-cols-1 gap-px bg-foreground/20 sm:grid-cols-2 lg:grid-cols-3">
+            {TASKS.map((t) => (
+              <a key={t} href="#zapros" className="block bg-background p-5 hover:text-accent">
+                <p className="text-[15px] font-semibold md:text-base">{t}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Карточки товара: цена по запросу, как на их сайте */}
+        <p className="tech-line mt-16 opacity-70">Актуальные цены и наличие по запросу</p>
+        <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {PRODUCTS.map((p) => (
             <article key={p.name} className="rounded-sm bg-card p-5 text-card-foreground">
               <img
@@ -284,9 +305,17 @@ function Index() {
                 className="mb-4 aspect-[4/3] w-full rounded-sm object-cover"
                 loading="lazy"
               />
-              <h3 className="text-[17px] font-semibold">{p.name}</h3>
+              <h4 className="text-[17px] font-semibold leading-snug">{p.name}</h4>
               <p className="tech-line mt-2 text-muted-foreground">{p.tech}</p>
-              <p className="tech-line mt-4">цена по запросу</p>
+              <div className="mt-5 flex items-center justify-between gap-3">
+                <p className="text-[15px] font-semibold">Цена по запросу</p>
+                <a
+                  href="#zapros"
+                  className="shrink-0 rounded-sm border border-foreground px-4 py-2 text-[15px] font-semibold hover:bg-accent hover:text-accent-foreground"
+                >
+                  Узнать цену
+                </a>
+              </div>
             </article>
           ))}
         </div>
