@@ -77,6 +77,27 @@ const CATALOG = [
   { title: "Домашний текстиль", cm: 220, subs: "Одеяла · подушки · покрывала · наматрасники" },
 ];
 
+const SERVICES = [
+  {
+    title: "Пошив постельного белья",
+    img: "poshiv-postelnogo-belya",
+    text: "Для гостиниц, пансионатов, больниц, детских садов и других учреждений по индивидуальным заказам, с учётом всех требований заказчика. Материалы можно выбрать на сайте или приехать на склад, образцы тканей отправляют по запросу. Популярные ткани для пошива: страйп-сатин, сатин, перкаль, бязь, махровое полотно. Срок пошива от 3 до 10 дней. На каждый заказ подписывается спецификация с точными параметрами; если заказ пришёл не по параметрам — меняют бесплатно.",
+    tech: "срок: от 3 до 10 дней · минимальный объём: [N]",
+  },
+  {
+    title: "Вышивка логотипа под заказ",
+    img: "vyshivka-logotipa",
+    text: "Для гостиниц, отелей, салонов красоты и ресторанов: постельное бельё, полотенца, халаты, скатерти, салфетки. Машинная вышивка нитками «Гутерманн» (Германия). Вышитый логотип не линяет, не выцветает и не деформируется.",
+    tech: "срок: [N] · минимальный объём: [N]",
+  },
+  {
+    title: "Изготовление ткани с логотипом заказчика",
+    img: "tkan-s-logotipom",
+    text: "Для мебельного и матрасного производства, пошива подушек и одеял. Метраж от 15 000 м.п., срок выполнения от 2,5 месяцев, предоставляются отгрузочные образцы.",
+    tech: "срок: от 2,5 месяцев · минимальный объём: от 15 000 м.п.",
+  },
+];
+
 const TASKS = [
   "Пошив постельного белья",
   "Пошив спецодежды",
@@ -321,6 +342,37 @@ function Index() {
         </div>
       </section>
 
+      {/* Услуги: три горизонтальные полосы во всю ширину */}
+      <section id="uslugi" className="shell section-y border-t border-foreground/20">
+        <p className="h2-display">Мы не только продаём ткань — мы шьём</p>
+        <div className="mt-12">
+          {SERVICES.map((s) => (
+            <article
+              key={s.title}
+              className="grid grid-cols-1 gap-6 border-b border-foreground/20 py-10 first:border-t md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] md:gap-10"
+            >
+              <img
+                src={`/images/usluga-${s.img}.jpg`}
+                alt={s.title}
+                className="aspect-[2/1] w-full rounded-sm object-cover"
+                loading="lazy"
+              />
+              <div className="min-w-0">
+                <h3 className="text-xl font-semibold md:text-2xl">{s.title}</h3>
+                <p className="measure mt-4">{s.text}</p>
+                <p className="tech-line mt-4 text-muted-foreground">{s.tech}</p>
+                <a
+                  href="#zapros"
+                  className="mt-6 inline-block rounded-sm bg-accent px-6 py-3 font-semibold text-accent-foreground"
+                >
+                  Обсудить заказ
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       {/* Подбор по ширине */}
       <section className="shell section-y border-t border-foreground/20">
         <h2 className="h2-display">Подбор по ширине рулона</h2>
@@ -347,7 +399,7 @@ function Index() {
       {/* Заглушки */}
       <section id="zaglushka" className="shell section-y border-t border-foreground/20">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
-          {["Услуги", "Оптовикам", "Доставка", "Контакты"].map((t) => (
+          {["Оптовикам", "Доставка", "Контакты"].map((t) => (
             <div key={t}>
               <h2 className="text-[17px] font-semibold md:text-lg">{t}</h2>
               <p className="tech-line mt-2 text-muted-foreground">[раздел в работе]</p>
