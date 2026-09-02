@@ -399,7 +399,7 @@ function Index() {
       {/* Заглушки */}
       <section id="zaglushka" className="shell section-y border-t border-foreground/20">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
-          {["Услуги", "Оптовикам", "Доставка", "Контакты"].map((t) => (
+          {["Оптовикам", "Доставка", "Контакты"].map((t) => (
             <div key={t}>
               <h2 className="text-[17px] font-semibold md:text-lg">{t}</h2>
               <p className="tech-line mt-2 text-muted-foreground">[раздел в работе]</p>
